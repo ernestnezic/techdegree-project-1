@@ -24,7 +24,8 @@ let randomNumber;
 let quotes = [
   {
     quote : "Be yourself; everyone else is already taken.",
-    source : "Oscar Wilde"
+    source : "Oscar Wilde",
+    tag : "powerful"
   },
   {
     quote : "Without music, life would be a mistake.Without music, life would be a mistake.",
@@ -35,7 +36,8 @@ let quotes = [
   {
     quote : "Life isn't about finding yourself. Life is about creating yourself.",
     source : "Dr. Seuss",
-    citation : "Happy Birthday to You"
+    citation : "Happy Birthday to You",
+    tag : "lifestyle"
   },
   {
     quote : "Logic will get you from A to Z; imagination will get you everywhere.",
@@ -90,6 +92,9 @@ function getRandomQuote( quotesArray ) {
  **/
 function printQuote() {
 
+  //Calling the funtion changes the background color each time the 'Get a new quote' button has been pressed
+  changeBackgroundColor();
+
   let randomQuote = getRandomQuote( quotes );
 
   let display = `
@@ -107,6 +112,11 @@ function printQuote() {
     display += `<span class = "year">${ randomQuote.year }</span>`;
   }
 
+  //Adding 'tag' element to 'display' string variable if there is one
+  if ( randomQuote.tag ) {
+    display += `<apan class = "tag">, ${ randomQuote.tag }</span>`;
+  }
+
   //Finishing 'display' string with closing paragrah tag; </p>
   display += "</p>";
 
@@ -115,6 +125,36 @@ function printQuote() {
 
 }
 
+
+/***
+ * 'changeBackgroundColor' function
+ * Changes the background of the web page to a random color
+ * 
+ * @type {Array} colorSymbolsArr - stores all the possible characters that a color tag can be made of
+ * @type {number} randomNumber - random number between 0 and 15 (16 possible symbols)
+ * @type {string} randomColor - random color tag produced from 'randomNumber'-s
+ * 
+ * (help source: https://stackoverflow.com/questions/1484506/random-color-generator)
+ **/
+function changeBackgroundColor() {
+
+  const colorSymbolsArr = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
+  let randomNumber = 0;
+  let randomColor = "#";
+
+  //FOR loop adding 6 
+  for ( i = 0; i < 6; i++) {
+    randomNumber = Math.floor( Math.random() * 15);
+    randomColor += colorSymbolsArr[ randomNumber ];
+  }
+
+  //changing the background color (help source: https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp)
+  document.body.style.backgroundColor = randomColor;
+}
+
+//setInterval() method automatically calls the printQuote() function every 10 seconds (1s=1000ms)
+//(help source: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval)
+var interval = window.setInterval( printQuote, 10000 );
 
 //Reloads a new quote by calling on the printQuote() function each time the button 'Show another quote' is pressed
 document.getElementById( "load-quote" ).addEventListener( "click", printQuote, false );
