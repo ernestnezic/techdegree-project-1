@@ -3,10 +3,6 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-
 let randomNumber;
 
 /*** 
@@ -40,7 +36,7 @@ let quotes = [
     year : "2012."
   },
   {
-    quote : "The trouble with having an open mind, of course, is that people will insist on coming along and trying to put things in it.",
+    quote : "The trouble with having an open mind is that people will insist on coming along and trying to put things in it.",
     source : "Terry Pratchett",
     citation : "Diggers"
   },
@@ -59,20 +55,45 @@ let quotes = [
 ***/
 
 function getRandomQuote( quotesArray ) {
+
   randomNumber = Math.floor( Math.random() * quotesArray.length );
   return quotesArray[ randomNumber ];
+
 }
 
 //console.log( `The quote is "${ getRandomQuote( quotes ).quote }. Random number between 0 and ${ quotes.length } is ${ randomNumber }."` );
-//console.log( quotes );
+
 
 /***
  * `printQuote` function
 ***/
+
+function printQuote() {
+
+  let randomQuote = getRandomQuote( quotes );
+
+  let display = `
+    <p class = "quote">${ randomQuote.quote }</p>
+    <p class = "source">${ randomQuote.source }
+  `;
+
+  if ( randomQuote.citation ) {
+    display += `<span class = "citation">${ randomQuote.citation }</span>`;
+  }
+
+  if ( randomQuote.year ) {
+    display += `<span class = "year">${ randomQuote.year }</span>`;
+  }
+
+  display += "</p>";
+
+  document.getElementById( "quote-box" ).innerHTML = display;
+
+}
 
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
 
-//document.getElementById("load-quote").addEventListener("click", printQuote, false);
+document.getElementById( "load-quote" ).addEventListener( "click", printQuote, false );
