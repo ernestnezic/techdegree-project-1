@@ -3,10 +3,11 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
+//More info in README.md file
 
 /***
  * @type {number}
- * Creating a global variable randomNumber used in getRandomQuote() function and console.log() while testing;
+ * Creating a global variable ''randomNumber' used in getRandomQuote() function and console.log() while testing;
  * Declaring the ramdomNumber variable in the global scope so we can access it with console.log() method outside the getRandomQuote() function scope.
  **/
 let randomNumber;
@@ -56,7 +57,7 @@ let quotes = [
   },
   {
     quote : "Have enough courage to start and enough heart to finish.",
-    source : "Jessica N. S. Yourko",
+    source : "Jessica N. S. Yourko"
   }
 
  ];
@@ -87,12 +88,12 @@ function getRandomQuote( quotesArray ) {
  * 'printQuote' function
  * Prints selected quote to the index.html web page
  * 
- * @type {object} randomQuote - stores a random quote from the 'quotes' array by calling getRandomQuote() function
+ * @type {object} randomQuote - stores a random quote object from the 'quotes' array by calling getRandomQuote() function
  * @type {string} display - stores a string of elements that need to be displayed on the index.html web page
  **/
 function printQuote() {
 
-  //Calling the funtion changes the background color each time the 'Get a new quote' button has been pressed
+  //Calling the funtion changes the background color each time the 'Show another quote' button has been pressed
   changeBackgroundColor();
 
   let randomQuote = getRandomQuote( quotes );
@@ -131,7 +132,7 @@ function printQuote() {
  * Changes the background of the web page to a random color
  * 
  * @type {Array} colorSymbolsArr - stores all the possible characters that a color tag can be made of
- * @type {number} randomNumber - random number between 0 and 15 (16 possible symbols)
+ * @type {number} randomNumber - random number between and including 0 and 14 (15 possible symbols)
  * @type {string} randomColor - random color tag produced from 'randomNumber'-s
  * 
  * (help source: https://stackoverflow.com/questions/1484506/random-color-generator)
@@ -142,9 +143,9 @@ function changeBackgroundColor() {
   let randomNumber = 0;
   let randomColor = "#";
 
-  //FOR loop adding 6 
+  //FOR loop adding 6 color symbols to create a unique random color tag
   for ( i = 0; i < 6; i++) {
-    randomNumber = Math.floor( Math.random() * 15);
+    randomNumber = Math.floor( Math.random() * 15 );
     randomColor += colorSymbolsArr[ randomNumber ];
   }
 
@@ -152,9 +153,11 @@ function changeBackgroundColor() {
   document.body.style.backgroundColor = randomColor;
 }
 
+
 //setInterval() method automatically calls the printQuote() function every 10 seconds (1s=1000ms)
 //(help source: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval)
 var interval = window.setInterval( printQuote, 10000 );
+
 
 //Reloads a new quote by calling on the printQuote() function each time the button 'Show another quote' is pressed
 document.getElementById( "load-quote" ).addEventListener( "click", printQuote, false );
